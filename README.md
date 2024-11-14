@@ -4,7 +4,9 @@
 1. [Цель работы](#Цель-работы)
 2. [Порядок выполнения лабораторной работы](#Порядок-выполнения-лабораторной-работы)
 3. [Ход выполнения работы](#Ход-выполнения-работы)
-
+4. [Лог команд](#Лог-команд)
+5. [История операций в форматированном виде](#История-операций-в-форматированном-виде)
+6. [Вывод](#Вывод)
 
 ## Цель работы
 Изучение базовых возможностей системы управления версиями, опыт работы с Git Api, опыт работы с локальным и удаленным репозиторием.
@@ -121,4 +123,210 @@ git show
 
 <p align="center"><img src="foto/show_branch.png"></p>
 <p align="center">Рисунок 11 - Последние изменения ветки branch1</p>
+
+### 9. Выполнение слияния в ветку master, разрешив конфликт
+Чтобы слить две ветки нужно перейти на ветку в которую нужно слить файлы со второй ветки и воспользоваться командой:
+```
+git merge (Название второй ветки)
+```
+При попытке слить в ветку master ветку branch1 возникает конфликт (рис. 12).
+<p align="center"><img src="foto/merge.png"></p>
+<p align="center">Рисунок 12 - Появление конфликта при слияние</p>
+
+Для просмотра конфликта был открыт Visual Studio Code (рис. 13).
+<p align="center"><img src="foto/problem.png"></p>
+<p align="center">Рисунок 13 - Ошибка слияния</p>
+
+Для разрешения данного конфликта был использован Visual Studio Code. После того как конфликт разрешён, полученный файл необходимо зафиксировать. Для этого сначала добавляем его в индекс с помощью команды:
+```
+git add (Название файла)
+```
+Затем проверям, что он добавился в индекс:
+```
+git status
+```
+И последним шагом фиксируем изменения, чтобы завершить слияние (рис. 14) с помощью команды:
+```
+git commit -m "(Комментарий)"
+```
+Чтобы передать все изменения в ветке master в удалённый репозиторий (рис. 15), необходимо воспользоватсья командой:
+```
+git push
+```
+<p align="center"><img src="foto/fix_problem.png"></p>
+<p align="center">Рисунок 14 - Завершение слияния веток</p>
+
+<p align="center"><img src="foto/merge_file_in_githyb.png"></p>
+<p align="center">Рисунок 15 - Файл на GitHub</p>
+
+### 10. Удаление побочной ветки 
+После успешного слияния ветка branch1 больше не нужна и её нужно удалить (рис. 16). 
+
+Сначала её нужно удалить локально с помощью команды:
+```
+git branch -d (Название ветки)
+```
+Затем она была удалена в удалённом репозитории в GitHub.
+<p align="center"><img src="foto/deleted_branch.png"></p>
+<p align="center">Рисунок 16 - Удаление ветки branch1</p>
+
+### 11. Создание изменений и их фиксация (с комментариями);
+В Visual Studio Code был создан новый файл "new" (рис. 17).
+<p align="center"><img src="foto/new_file_new.png"></p>
+<p align="center">Рисунок 17 - Новый файл "new"</p>
+
+Также эти изменения были отправлены на удалённый репозиторий (рис. 18-19).
+<p align="center"><img src="foto/new_file_add.png"></p>
+<p align="center">Рисунок 18 - Отправка файла</p>
+
+<p align="center"><img src="foto/new_file_new_git.png"></p>
+<p align="center">Рисунок 19 - Новый файл "new" GitHub</p>
+
+### 12. Создание отката коммита
+Для отката последнего коммита необходимо воспользоваться командой:
+```
+git reset --soft HEAD~1
+```
+или 
+```
+git reset --hard HEAD~1
+```
+В ходе лабораторной работы было создано 3 коммита с новым файлом (рис. 20) и использовано две эти команды (рис. 21-22). Также результаты этих команды (рис.23-24).
+<p align="center"><img src="foto/3_commit.png"></p>
+<p align="center">Рисунок 20 - 3 коммита</p>
+
+<p align="center"><img src="foto/soft.png"></p>
+<p align="center">Рисунок 21 - Использование команды для отката</p>
+
+<p align="center"><img src="foto/hard.png"></p>
+<p align="center">Рисунок 22 - Использование команды для отката</p>
+
+<p align="center"><img src="foto/1_otkat.png"></p>
+<p align="center">Рисунок 23 - Первый откат</p>
+
+<p align="center"><img src="foto/2_otkat.png"></p>
+<p align="center">Рисунок 24 - Второй откат</p>
+
+### 13. Создание ветки для отчёта
+Для создания ветки для отчёта (рис. 25) необходимо воспользоваться командой:
+```
+git branch (Название новой ветки)
+```
+А чтобы посмотреть какие существуют ветки (рис. 25), можно воспользоватсья командой:
+```
+git branch
+```
+<p align="center"><img src="foto/branch.png"></p>
+<p align="center">Рисунок 25 - Создание и проверка веток</p>
+
+Чтобы недавно созданная локальная ветка otchet появилась в удалённом репозитории (рис. 26), нужно воспользоваться командой:
+```
+git push origin otchet
+```
+<p align="center"><img src="foto/branchs.png"></p>
+<p align="center">Рисунок 26 - Отправка изменений в удалённый репозиторий</p>
+
+### 14. Начало оформления отчёта в файле README.md
+Ещё одним важным требованием для выполнения лабораторной работы является написание отчёта в файле README.md. Для удобного форматирования этого файла был выбран редактор кода VS Code
+
+### 15. Получение истории операций в форматированном виде
+Чтобы получить историю операций в форматированном виде (рис. 28) (сокращённый
+хэш + дата + имя автора + комментарий), необходимо воспользоваться командой:
+```
+git log --date=format:'%D' --pretty=format:"%h -> %cd, %cn ( %s )"
+```
+
+<p align="center"><img src="foto/hesh.png"></p>
+<p align="center">Рисунок 27 - История операций в форматированном виде</p>
+
+### 16. Отправка локальных изменений в сетевое хранилище GitHub
+Чтобы отправить локальные изменения в сетевое хранилище GitHub после завершения написания отчёта нужно воспользоваться командой: 
+```
+git push
+```
+После чего все локальные изменения ветки otchet появятся в удалённом репозитории
+
+## Лог команд
+<p>git config --global user.name "4315_Sokolov_Mark_Alekseevich"
+<p>git config --global user.email "arambo202@gmail.com"
+<p>cd 
+<p>git clone https://github.com/MarikSmerch/LR6
+<p>ls 
+<p>git pull
+<p>ls 
+<p>git log master
+<p>git checkout branch1
+<p>git log branch1
+<p>git checkout master
+<p>git show 
+<p>git checkout branch1
+<p>git show master
+<p>git checkout master
+<p>git merge branch1
+<p>git status
+<p>git add mergefile.txt
+<p>git add .
+<p>git commit -m "mergering yspeh"
+<p>git push
+<p>git branch -d branch1
+<p>git branch
+<p>git status
+<p>git add .
+<p>git commit -m "added cool file"
+<p>git push
+<p>git status
+<p>git add .
+<p>git commit -m "added text in file"
+<p>git push
+<p>git status
+<p>git add .
+<p>git commit -m "one more time commit"
+<p>git push
+<p>git reset --soft HEAD~1
+<p>git reset --hard HEAD~1
+<p>git branch otchet
+<p>git branch
+<p>git checkout otchet
+<p>git push origin otchet
+<p>git add .
+<p>git commit -m "readme1"
+<p>git push
+<p>git add .
+<p>git commit -m "readme2"
+<p>git push
+<p>git add .
+<p>git commit -m "mega progress in otchet"
+<p>git push
+<p>git log --date=format:'%D' --pretty=format:"%h -> %cd, %cn ( %s )"
+
+## История операций в форматированном виде
+7e103b1 -> 11/14/24, 4315_Sokolov_Mark_Alekseevich ( mega progress in otchet )
+
+c40cf32 -> 11/12/24, 4315_Sokolov_Mark_Alekseevich ( readme2 )
+
+48ec4fc -> 11/12/24, 4315_Sokolov_Mark_Alekseevich ( readme1 )
+
+569401d -> 11/12/24, 4315_Sokolov_Mark_Alekseevich ( one more time commit )
+
+e9f487b -> 11/12/24, 4315_Sokolov_Mark_Alekseevich ( added text in file )
+
+a663de5 -> 11/12/24, 4315_Sokolov_Mark_Alekseevich ( added cool file )
+
+db35992 -> 11/12/24, 4315_Sokolov_Mark_Alekseevich ( mergering yspeh )
+
+346a4c6 -> 11/12/24, GitHub ( Add files via upload )
+
+921f53b -> 11/21/20, GitHub ( Обновление информации )
+
+0f9f50d -> 11/21/20, GitHub ( Заполнил файл )
+
+c08a654 -> 11/21/20, GitHub ( Файл создан пустым )
+
+3c6e913 -> 11/21/20, GitHub ( Initial commit )
+
+
+## Вывод
+В ходе данной лабораторной работы были изучены базовые возможности системы управления версиями, а также получен опыт работы с Git Api и опыт работы с локальным и удаленным репозиторием. 
+
+Была изучена система контроля версий Git и её интеграция с платформой GitHub. Получен практический опыт в использовании ключевых функций Git: создание и клонирование репозиториев, объединение веток, разрешение конфликтов, а также ведение и анализ истории изменений с форматированным отображением операций.
 
